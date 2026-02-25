@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("5326994c-5185-4976-ae53-8526ea9d34f4")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("AgroSolutions-Users")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ad5b6d39e89714cb1d61277c78ac685fb06da38")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+822764014ae07e06e4401a39f8daf6158107b3d2")]
 [assembly: System.Reflection.AssemblyProductAttribute("AgroSolutions-Users")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AgroSolutions-Users")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

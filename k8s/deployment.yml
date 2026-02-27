@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-deployment
+  labels:
+    app: users
+spec:
+  replicas: 2 # Atende ao requisito de alta disponibilidade/escalabilidade
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+      - name: users-api
+        image: viniciusdelr/agrosolutions-users:v1 # Sua imagem do Docker Hub
+        ports:
+        - containerPort: 8080
+        env:
+        # Injeção da Connection String do Azure SQL
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: agro-db-secret
+              key: connection-string
+        # Injeção da Chave do JWT para autenticação [cite: 11]
+        - name: Jwt__Key
+          valueFrom:
+            secretKeyRef:
+              name: agro-db-secret
+              key: jwt-key
+        - name: Jwt__Issuer
+          value: "AgroSolutionsUsers"
+        - name: Jwt__Audience
+          value: "AgroSolutionsApps"

@@ -26,7 +26,6 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1"
     });
 
-    // Adiciona a definição de segurança para o JWT
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -57,14 +56,26 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
-// CORREÇÃO 1: Habilitar o redirecionamento HTTPS apenas se necessário ou garantir que a porta coincida
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<IdentityService.Data.AppDbContext>();
+        // Isso aplica as migrations pendentes de forma assÃ­ncrona/sÃ­ncrona no banco do Azure
+        context.Database.Migrate(); 
+        Console.WriteLine("Migrations aplicadas com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Erro ao aplicar migrations: {ex.Message}");
+    }
+}
+
 app.UseHttpsRedirection();
 
-// CORREÇÃO 2: Habilitar Arquivos Estáticos. O Swagger UI precisa disso para carregar o CSS/JS
 app.UseStaticFiles();
 
-// CORREÇÃO 3: Ordem do Swagger. 
-// Com o RoutePrefix vazio, a URL será apenas: https://localhost:7172/index.html
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

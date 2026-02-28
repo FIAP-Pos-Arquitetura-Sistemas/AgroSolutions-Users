@@ -62,9 +62,10 @@ Este serviço segue os princípios de:
 
 ### 1 - Clonar repositório
 
-bash
+- bash
+  
 git clone https://github.com/seuusuario/AgroSolutions-UserService.git
-cd AgroSolutions-UserService'''
+cd AgroSolutions-UserService
 
 ### 2 - Rodar com .NET
 dotnet restore

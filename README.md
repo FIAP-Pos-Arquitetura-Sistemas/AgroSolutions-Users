@@ -64,17 +64,11 @@ Este serviço segue os princípios de:
 
 - bash
   
-git clone https://github.com/seuusuario/AgroSolutions-UserService.git
+git clone https://github.com/FIAP-Pos-Arquitetura-Sistemas/AgroSolutions-Users
 cd AgroSolutions-UserService
 
-### 2 - Rodar com .NET
-dotnet restore
-dotnet run --project src/AgroSolutions.UserService.API
-
 ### Executando com Docker
--Build
 docker build -t agrosolutions-userservice .
--Run
 docker run -p 8080:80 agrosolutions-userservice
 
 ---
